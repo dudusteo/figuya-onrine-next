@@ -26,13 +26,18 @@ const cart = g.model("Cart", {
 	currency: g.enumRef(currency),
 });
 
-const customer = g.model("Customer", {
-	firstName: g.string(),
-	lastName: g.string(),
-	email: g.email().unique(),
-	phoneNumber: g.phoneNumber().optional(),
-	billingAddress: g.relation(address),
-});
+const customer = g
+	.model("Customer", {
+		firstName: g.string(),
+		lastName: g.string(),
+		email: g.email().unique(),
+		avatarUrl: g.url().optional(),
+		phoneNumber: g.phoneNumber().optional(),
+		billingAddress: g.relation(address).optional(),
+	})
+	.auth((rules) => {
+		rules.public().read();
+	});
 
 const orderItem = g.type("OrderItem", {
 	name: g.string(),
@@ -67,14 +72,17 @@ const product = g.model("Product", {
 	variants: g.relation(variant).optional().list().optional(),
 });
 
+const jwt = auth.JWT({
+	issuer: "grafbase",
+	secret: g.env("NEXTAUTH_SECRET"),
+});
+
 export default config({
 	schema: g,
-	// Integrate Auth
-	// https://grafbase.com/docs/auth
-	// auth: {
-	//   providers: [authProvider],
-	//   rules: (rules) => {
-	//     rules.private()
-	//   }
-	// }
+	auth: {
+		providers: [jwt],
+		rules: (rules) => {
+			rules.private();
+		},
+	},
 });
