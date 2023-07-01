@@ -21,8 +21,6 @@ const AuthProviders = () => {
 		const fetchProviders = async () => {
 			const res = await getProviders();
 
-			console.log(res);
-
 			setProviders(res);
 		};
 
@@ -45,8 +43,6 @@ const AuthProviders = () => {
 			</div>
 		);
 	}
-
-	return <div>AuthProviders</div>;
 };
 
 export default AuthProviders;

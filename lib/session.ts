@@ -43,14 +43,14 @@ export const authOptions: NextAuthOptions = {
 
 			try {
 				const data = (await getCustomer(email)) as {
-					user?: UserProfile;
+					customer?: UserProfile;
 				};
 
 				const newSession = {
 					...session,
 					user: {
 						...session.user,
-						...data?.user,
+						...data?.customer,
 					},
 				};
 
@@ -64,9 +64,9 @@ export const authOptions: NextAuthOptions = {
 			try {
 				const userExists = (await getCustomer(
 					user?.email as string
-				)) as { user?: UserProfile };
+				)) as { customer?: UserProfile };
 
-				if (!userExists.user) {
+				if (!userExists.customer) {
 					await createCustomer(
 						user.name as string,
 						user.name as string,
@@ -77,7 +77,7 @@ export const authOptions: NextAuthOptions = {
 
 				return true;
 			} catch (error: any) {
-				console.log(error);
+				console.log("Error checking if user exists: ", error);
 				return false;
 			}
 		},

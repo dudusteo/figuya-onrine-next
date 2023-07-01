@@ -5,6 +5,7 @@ export const getCustomerQuery = `
         lastName
         email
         avatarUrl
+        id
       }
     }
 `;
