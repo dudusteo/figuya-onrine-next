@@ -2,26 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+@layer utilities {
+	.clip-path-big {
+		clip-path: polygon(40% 0%, 100% 0%, 60% 100%, 0% 100%);
+	}
+	.clip-path-small {
+		clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+	}
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.custom-btn {
+	@apply flex flex-row relative justify-center items-center py-3 px-6 outline-none;
 }
