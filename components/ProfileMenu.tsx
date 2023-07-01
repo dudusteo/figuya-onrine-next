@@ -9,10 +9,10 @@ import React from "react";
 const ProfileMenu = ({ session }: { session: SessionInterface }) => {
 	return (
 		<div>
-			{session?.user?.image && (
+			{session?.user?.avatarUrl && (
 				<Link href={`/account/${session?.user?.id}`}>
 					<Image
-						src={session.user.image}
+						src={session.user.avatarUrl}
 						width={40}
 						height={40}
 						className="rounded-full"
